@@ -1,12 +1,12 @@
+import "./App.scss"
+
+
+import { RouterProvider } from "react-router-dom"
+import { router } from "./router"
 
 
 function App() {
-
-  return (
-    <>
-    11111
-    </>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
