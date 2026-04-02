@@ -1,0 +1,73 @@
+@font-face {
+    font-family: "RubikGlitch";
+    src: url("@/assets/font/RubikGlitch-Regular.woff2");
+}
+
+.header-container {
+    display: flex;
+
+    width: 100%;
+    height: 72px;
+    // border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+    align-items: center;
+    padding: 12px 32px;
+
+    a {
+        text-decoration: none;
+    }
+
+    // logo
+    .logo {
+        flex: 1;
+        .logo-container {
+            font-family: "RubikGlitch";
+            font-size: 1.25rem;
+            // 文字渐变
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    // 导航菜单
+    .nav-menu {
+        display: flex;
+        flex: 0 auto;
+        gap: 16px;
+        
+        .nav-item {
+            width: 100%;
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-weight: 400;
+            color: #5c687a;
+
+            &:hover {
+                color: #06b6d4
+            }
+        }
+
+    }
+
+    // 右侧 音乐控件 + 头像
+    .header-right {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 16px;
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(47, 29, 14, 0.14);
+            
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
+}

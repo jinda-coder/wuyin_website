@@ -1,0 +1,36 @@
+// 主布局容器
+.layout-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f9f9f9;
+
+}
+
+// 网格背景
+.layout-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    // 禁止鼠标事件
+    pointer-events: none;
+
+    // 通过横纵渐变实现网格效果
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 18px 18px;
+
+    // 遮罩层 实现网格渐隐效果
+    mask-image: radial-gradient(circle at center,
+            black 0%,
+            black 30%,
+            transparent 80%);
+
+    // 兼容性
+    -webkit-mask-image: radial-gradient(circle at center,
+            black 0%,
+            black 30%,
+            transparent 80%);
+}
