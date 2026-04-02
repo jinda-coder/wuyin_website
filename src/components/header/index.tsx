@@ -13,10 +13,10 @@ export const Header: React.FC = () => {
             {/* 导航 */}
             <nav className="nav-menu">
                 <Link to="/" className="nav-item active">首页</Link>
-                <Link to="/blog" className="nav-item">文章</Link>
-                <Link to="/projects" className="nav-item">随笔</Link>
-                <Link to="/about" className="nav-item">友链</Link>
-                <Link to="/about" className="nav-item">留言</Link>
+                <Link to="/articles" className="nav-item">文章</Link>
+                <Link to="/notes" className="nav-item">随笔</Link>
+                <Link to="/friends" className="nav-item">友链</Link>
+                <Link to="/message" className="nav-item">留言</Link>
             </nav>
             {/* music-player + avatar */}
             <div className="header-right">
