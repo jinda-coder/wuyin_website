@@ -1,7 +1,7 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
 import { showMessage } from "@/components/toast";
 
-interface IResponse<T = any> {
+export interface IResponse<T = any> {
     code: number,
     msg: string,
     data: T
@@ -9,12 +9,12 @@ interface IResponse<T = any> {
 
 
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 5000
 })
 
 // 响应拦截器
-axios.interceptors.response.use(
+axiosInstance.interceptors.response.use(
     (response: AxiosResponse<IResponse>) => {
         if (response.data.code !== 0) {
             return Promise.reject(response.data.msg);
