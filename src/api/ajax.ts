@@ -8,7 +8,7 @@ interface IResponse<T = any> {
 }
 
 
-axios.create({
+const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
     timeout: 5000
 })
@@ -33,3 +33,5 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 )
+
+export default axiosInstance;
