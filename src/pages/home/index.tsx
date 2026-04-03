@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import type { RecommandArticle } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
 import { formatRelativeTime } from "@/utils/time"
+import { Loading } from "@/components/loading"
 
 const recentArticles = [
     { id: 1, date: "04-01", title: "Rust 异步编程详解", tag: "Rust" },
@@ -17,6 +18,7 @@ const recentArticles = [
 
 export const Home: React.FC = () => {
 
+    const [loading, setLoading] = useState(true)
     const [recommand, setRecommand] = useState<[article: RecommandArticle]>([]);
 
 
@@ -24,6 +26,7 @@ export const Home: React.FC = () => {
         ArticleAPI.recommand().then(res => {
             setRecommand(res.data);
             console.log(res.data);
+            setLoading(false);
         })
     }, [])
 
@@ -70,19 +73,22 @@ export const Home: React.FC = () => {
                 {/* 推荐文章 */}
                 <section className="featured-articles">
                     <h2 className="section-title">推荐文章</h2>
-                    <div className="article-grid">
-                        {recommand.map(article => (
-                            <div key={article.articleId} className="article-card">
-                                <h3 className="card-title">{article.title}</h3>
-                                <p className="card-desc">{article.summary}</p>
-                                <div className="card-meta">
-                                    <span>{formatRelativeTime(article.publishedTime)}</span>
-                                    <span>·</span>
-                                    <span>{article.category}</span>
+                    {loading ? (<Loading />) : (
+                        <div className="article-grid">
+                            {recommand.map(article => (
+                                <div key={article.articleId} className="article-card">
+                                    <h3 className="card-title">{article.title}</h3>
+                                    <p className="card-desc">{article.summary}</p>
+                                    <div className="card-meta">
+                                        <span>{formatRelativeTime(article.publishedTime)}</span>
+                                        <span>·</span>
+                                        <span>{article.category}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
+
                 </section>
 
                 {/* 最近更新 */}
