@@ -2,10 +2,25 @@ import "./index.scss"
 import { Link } from "react-router-dom"
 import avatar from "@/assets/avatar/avatar.jpg"
 import { MusicPlayer } from "../music-player"
+import { useEffect, useState } from "react"
 
 export const Header: React.FC = () => {
+
+    const [scrolled, setScrolled] = useState(false)
+
+    useEffect( () => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    })
+
+
     return (
-        <header className="header-container">
+        <header className={`header-container ${scrolled ? "scrolled" : ""}`}>
             {/* logo */}
             <div className="logo">
                 <Link to="/" className="logo-container">WUYIN DEV</Link>

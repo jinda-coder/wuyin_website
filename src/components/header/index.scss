@@ -4,13 +4,26 @@
 }
 
 .header-container {
+    position: sticky;
     display: flex;
+    top: 0;
 
     width: 100%;
     height: 72px;
     // border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
     align-items: center;
     padding: 12px 32px;
+
+    transition: all 0.3s ease;
+    z-index: 99;
+
+    // 滚动样式
+    &.scrolled {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
 
     a {
         text-decoration: none;
@@ -34,7 +47,7 @@
     .nav-menu {
         display: flex;
         flex: 0 auto;
-        gap: 16px;
+        gap: 24px;
 
         .nav-item {
             width: 100%;
