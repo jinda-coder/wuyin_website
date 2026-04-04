@@ -233,8 +233,10 @@
             }
         }
 
-        // 最近更新 - 列表形式                                                                                                                                                                                                        
+        // 最近更新 - 列表形式
         .recent-articles {
+            margin-top: 48px;
+
             .article-list {
                 display: flex;
                 flex-direction: column;
@@ -251,6 +253,7 @@
                 border-radius: 8px;
                 border: 1px solid rgba(0, 0, 0, 0.06);
                 transition: all 0.2s;
+                animation: fadeIn 0.4s ease;
 
                 &:hover {
                     background: rgba(6, 182, 212, 0.08);

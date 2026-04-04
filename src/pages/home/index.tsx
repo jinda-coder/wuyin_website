@@ -3,31 +3,31 @@ import { SwiperSlide, Swiper } from "swiper/react"
 import "swiper/swiper.css"
 import "./index.scss"
 import { useEffect, useState } from "react"
-import type { RecommandArticle } from "@/api/endpoint/articles"
+import type { ArticleItem } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
-import { formatRelativeTime } from "@/utils/time"
+import { formatRelativeTime, formatShortDate } from "@/utils/time"
 import { Loading } from "@/components/loading"
 import { Link } from "react-router-dom"
 
-const recentArticles = [
-    { id: 1, date: "04-01", title: "Rust 异步编程详解", tag: "Rust" },
-    { id: 2, date: "03-28", title: "Vite 插件开发入门", tag: "工具" },
-    { id: 3, date: "03-25", title: "React Hooks 最佳实践", tag: "React" },
-    { id: 4, date: "03-22", title: "前端工程化思考", tag: "工程化" },
-    { id: 5, date: "03-18", title: "Web 性能监控方案", tag: "性能" }
-]
-
 export const Home: React.FC = () => {
 
-    const [loading, setLoading] = useState(true)
-    const [recommand, setRecommand] = useState<[article: RecommandArticle]>([]);
+    const [recommandLoading, setRecommandLoading] = useState(true)
+    const [recentLoading, setRecentLoading] = useState(true)
+    const [recommand, setRecommand] = useState<ArticleItem[]>([]);
+    const [recentArticles, setRecentArticles] = useState<ArticleItem[]>([]);
 
 
     useEffect(() => {
         ArticleAPI.recommand().then(res => {
             setRecommand(res.data);
-            console.log(res.data);
-            setLoading(false);
+            setRecommandLoading(false);
+        })
+    }, [])
+
+    useEffect(() => {
+        ArticleAPI.recent().then(res => {
+            setRecentArticles(res.data);
+            setRecentLoading(false);
         })
     }, [])
 
@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
                         <h2 className="section-title">推荐文章</h2>
                         <Link to="/articles" className="view-more">查看更多 →</Link>
                     </div>
-                    {loading ? (<Loading />) : (
+                    {recommandLoading ? (<Loading />) : (
                         <div className="article-grid">
                             {recommand.map(article => (
                                 <div key={article.articleId} className="article-card">
@@ -99,13 +99,16 @@ export const Home: React.FC = () => {
                 <section className="recent-articles">
                     <h2 className="section-title">最近更新</h2>
                     <div className="article-list">
-                        {recentArticles.map(article => (
-                            <div key={article.id} className="article-item">
-                                <span className="item-date">{article.date}</span>
-                                <span className="item-title">{article.title}</span>
-                                <span className="item-tag">{article.tag}</span>
-                            </div>
-                        ))}
+                        {recentLoading ? (
+                            <Loading />
+                        ) : (
+                            recentArticles.map(article => (
+                                <div key={article.articleId} className="article-item">
+                                    <span className="item-date">{formatShortDate(article.publishedTime)}</span>
+                                    <span className="item-title">{article.title}</span>
+                                    <span className="item-tag">{article.tags}</span>
+                                </div>
+                            )))}
                     </div>
                 </section>
             </main>
