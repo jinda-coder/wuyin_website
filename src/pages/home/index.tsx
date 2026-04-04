@@ -7,6 +7,7 @@ import type { RecommandArticle } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
 import { formatRelativeTime } from "@/utils/time"
 import { Loading } from "@/components/loading"
+import { Link } from "react-router-dom"
 
 const recentArticles = [
     { id: 1, date: "04-01", title: "Rust 异步编程详解", tag: "Rust" },
@@ -72,7 +73,10 @@ export const Home: React.FC = () => {
             <main className="content-section">
                 {/* 推荐文章 */}
                 <section className="featured-articles">
-                    <h2 className="section-title">推荐文章</h2>
+                    <div className="section-header">
+                        <h2 className="section-title">推荐文章</h2>
+                        <Link to="/articles" className="view-more">查看更多 →</Link>
+                    </div>
                     {loading ? (<Loading />) : (
                         <div className="article-grid">
                             {recommand.map(article => (

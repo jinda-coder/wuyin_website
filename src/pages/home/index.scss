@@ -159,8 +159,30 @@
             }
         }
 
-        // 推荐文章 - 卡片网格                                                                                                                                                                                                        
+        // 推荐文章 - 卡片网格
         .featured-articles {
+            .section-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 24px;
+            }
+
+            .section-title {
+                margin-bottom: 0;
+            }
+
+            .view-more {
+                font-size: 14px;
+                color: #06b6d4;
+                text-decoration: none;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #0891b2;
+                }
+            }
+
             .article-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -264,7 +286,7 @@
     from {
         opacity: 0;
         transform: translateY(10px);
-    }
+    }   
 
     to {
         opacity: 1;
