@@ -33,3 +33,8 @@
             black 30%,
             transparent 80%);
 }
+
+.layout-container>* {
+    position: relative;
+    z-index: 2;
+}

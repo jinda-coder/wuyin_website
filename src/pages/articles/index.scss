@@ -248,6 +248,7 @@
 }
 
 .articles-aside {
+    margin-top: 34px;
     padding: 16px;
     border-radius: 14px;
     border: 1px solid rgba(148, 163, 184, 0.2);
@@ -258,6 +259,12 @@
         font-size: 16px;
         margin-bottom: 12px;
         color: #0f172a;
+    }
+}
+
+@media (max-width: 920px) {
+    .articles-aside {
+        margin-top: 0;
     }
 }
 
