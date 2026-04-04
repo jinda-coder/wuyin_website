@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.95.0
+        version: 5.96.2(react@18.3.1)
       axios:
         specifier: ^1.13.6
         version: 1.14.0
@@ -412,6 +415,14 @@ packages:
 
   '@rolldown/pluginutils@1.0.0-rc.7':
     resolution: {integrity: sha512-qujRfC8sFVInYSPPMLQByRh7zhwkGFS4+tyMQ83srV1qrxL4g8E2tyxVVyxd0+8QeBM1mIk9KbWxkegRr76XzA==}
+
+  '@tanstack/query-core@5.96.2':
+    resolution: {integrity: sha512-hzI6cTVh4KNRk8UtoIBS7Lv9g6BnJPXvBKsvYH1aGWvv0347jT3BnSvztOE+kD76XGvZnRC/t6qdW1CaIfwCeA==}
+
+  '@tanstack/react-query@5.96.2':
+    resolution: {integrity: sha512-sYyzzJT4G0g02azzJ8o55VFFV31XvFpdUpG+unxS0vSaYsJnSPKGoI6WdPwUucJL1wpgGfwfmntNX/Ub1uOViA==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
@@ -1799,6 +1810,13 @@ snapshots:
   '@rolldown/pluginutils@1.0.0-rc.12': {}
 
   '@rolldown/pluginutils@1.0.0-rc.7': {}
+
+  '@tanstack/query-core@5.96.2': {}
+
+  '@tanstack/react-query@5.96.2(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.96.2
+      react: 18.3.1
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
