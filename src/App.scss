@@ -3,3 +3,17 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+// 全局动画效果
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }   
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
