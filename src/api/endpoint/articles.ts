@@ -8,6 +8,7 @@ export interface ArticleItem {
     publishedTime: string,
     category: string,
     tags: string[],
+    contentMd: string,
 }
 
 export interface PagePeram {
@@ -44,5 +45,14 @@ export async function recent(): Promise<IResponse<[item: ArticleItem]>> {
  */
 export async function page(params: PagePeram): Promise<IResponse<PageResult<ArticleItem>>> {
     const response = await axiosInstance.post("/articles/page", params);
+    return response.data;
+}
+
+/**
+ * 文章详情
+ * @returns 文章详情
+ */
+export async function detail(articleId: string): Promise<IResponse<ArticleItem>> {
+    const response = await axiosInstance.get("/articles/detail", { params: { articleId } });
     return response.data;
 }
