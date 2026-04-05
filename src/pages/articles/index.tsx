@@ -1,50 +1,42 @@
 import "./index.scss"
 
-import { useEffect, useState } from "react"
+import { useMemo } from "react"
 import type { ArticleItem } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
+import { useQuery } from "@tanstack/react-query"
 import { Loading } from "@/components/loading"
 import { formatFullDate, formatRelativeTime } from "@/utils/time"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
 export const Articles: React.FC = () => {
     const DEFAULT_PAGE_SIZE = 6
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState("")
-    const [keyword, setKeyword] = useState("")
-    const [activeCategory, setActiveCategory] = useState("全部")
-    const [articleList, setArticleList] = useState<ArticleItem[]>([])
-    const [recommandList, setRecommandList] = useState<ArticleItem[]>([])
-    const [pageNo, setPageNo] = useState(1)
-    const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
-    const [total, setTotal] = useState(0)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const location = useLocation()
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        ArticleAPI.recommand()
-            .then((res) => {
-                setRecommandList(res.data ?? [])
-            })
-            .catch(() => {
-                setRecommandList([])
-            })
-    }, [])
+    const pageNo = Math.max(1, Number(searchParams.get("pageNo") || 1))
+    const pageSize = Math.max(1, Number(searchParams.get("pageSize") || DEFAULT_PAGE_SIZE))
+    const keyword = searchParams.get("keyword") || ""
+    const activeCategory = searchParams.get("category") || "全部"
 
-    useEffect(() => {
-        setLoading(true)
-        ArticleAPI.page({ pageNo, pageSize })
-            .then((res) => {
-                const pageData = res.data
-                setArticleList(pageData?.list ?? [])
-                setTotal(pageData?.total ?? 0)
-                setPageSize(pageData?.pageSize ?? DEFAULT_PAGE_SIZE)
-                setError("")
-            })
-            .catch(() => {
-                setError("文章加载失败，请稍后重试")
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [pageNo, pageSize])
+    const pageQuery = useQuery({
+        queryKey: ["articles", "page", pageNo, pageSize],
+        queryFn: async () => {
+            const response = await ArticleAPI.page({ pageNo, pageSize })
+            return response.data
+        }
+    })
+
+    const recommandQuery = useQuery({
+        queryKey: ["articles", "recommand"],
+        queryFn: async () => {
+            const response = await ArticleAPI.recommand()
+            return response.data ?? []
+        }
+    })
+
+    const articleList = pageQuery.data?.list ?? []
+    const total = pageQuery.data?.total ?? 0
 
     const categories = [
         "全部",
@@ -78,7 +70,50 @@ export const Articles: React.FC = () => {
         if (targetPage < 1 || targetPage > totalPages || targetPage === pageNo) {
             return
         }
-        setPageNo(targetPage)
+        setSearchParams((prev) => {
+            const next = new URLSearchParams(prev)
+            next.set("pageNo", String(targetPage))
+            next.set("pageSize", String(pageSize))
+            return next
+        })
+    }
+
+    const handleKeywordChange = (value: string) => {
+        setSearchParams((prev) => {
+            const next = new URLSearchParams(prev)
+            const normalized = value.trim()
+            if (normalized) {
+                next.set("keyword", value)
+            } else {
+                next.delete("keyword")
+            }
+            next.set("pageNo", "1")
+            next.set("pageSize", String(pageSize))
+            return next
+        })
+    }
+
+    const handleCategoryChange = (category: string) => {
+        setSearchParams((prev) => {
+            const next = new URLSearchParams(prev)
+            if (category === "全部") {
+                next.delete("category")
+            } else {
+                next.set("category", category)
+            }
+            next.set("pageNo", "1")
+            next.set("pageSize", String(pageSize))
+            return next
+        })
+    }
+
+    const querySuffix = useMemo(
+        () => (location.search ? location.search : ""),
+        [location.search]
+    )
+
+    const handleClickArticle = (articleId: string) => {
+        navigate(`/articles/${articleId}${querySuffix}`)
     }
 
     return (
@@ -86,7 +121,7 @@ export const Articles: React.FC = () => {
             <section className="articles-hero">
                 <p className="hero-subtitle">Article Archive</p>
                 <h1 className="hero-title">文章列表</h1>
-                <p className="hero-desc">按主题筛选，快速定位想看的内容。</p>
+                <p className="hero-desc">记录自己的知识库笔记、踩过的坑</p>
             </section>
 
             <section className="articles-toolbar">
@@ -94,7 +129,7 @@ export const Articles: React.FC = () => {
                     className="search-input"
                     type="text"
                     value={keyword}
-                    onChange={(event) => setKeyword(event.target.value)}
+                    onChange={(event) => handleKeywordChange(event.target.value)}
                     placeholder="搜索标题、摘要或标签..."
                 />
                 <div className="category-tabs">
@@ -102,7 +137,7 @@ export const Articles: React.FC = () => {
                         <button
                             key={category}
                             className={`tab-item ${activeCategory === category ? "active" : ""}`}
-                            onClick={() => setActiveCategory(category)}
+                            onClick={() => handleCategoryChange(category)}
                         >
                             {category}
                         </button>
@@ -110,11 +145,9 @@ export const Articles: React.FC = () => {
                 </div>
             </section>
 
-            {loading ? (
+            {pageQuery.isLoading ? (
                 <Loading />
-            ) : error ? (
-                <section className="state-card">{error}</section>
-            ) : (
+            ): (
                 <main className="articles-layout">
                     <section className="articles-main">
                         <div className="list-header">
@@ -127,7 +160,7 @@ export const Articles: React.FC = () => {
                                 <div className="state-card">没有匹配结果，试试调整关键词或分类。</div>
                             ) : (
                                 filteredList.map((article) => (
-                                    <article key={article.articleId} className="article-card">
+                                    <article key={article.articleId} className="article-card" onClick={() => handleClickArticle(article.articleId)}>
                                         <div className="article-meta">
                                             <span>{formatFullDate(article.publishedTime)}</span>
                                             <span>·</span>
@@ -180,8 +213,8 @@ export const Articles: React.FC = () => {
                     <aside className="articles-aside">
                         <h3 className="aside-title">推荐阅读</h3>
                         <div className="aside-list">
-                            {recommandList.slice(0, 5).map((article, index) => (
-                                <article key={article.articleId} className="aside-item">
+                            {(recommandQuery.data ?? []).slice(0, 5).map((article: ArticleItem, index) => (
+                                <article key={article.articleId} className="aside-item" onClick={() => handleClickArticle(article.articleId)}>
                                     <span className="aside-order">0{index + 1}</span>
                                     <div className="aside-content">
                                         <h4>{article.title}</h4>
