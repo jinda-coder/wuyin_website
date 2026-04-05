@@ -2,34 +2,33 @@ import { Autoplay, Pagination } from "swiper/modules"
 import { SwiperSlide, Swiper } from "swiper/react"
 import "swiper/swiper.css"
 import "./index.scss"
-import { useEffect, useState } from "react"
-import type { ArticleItem } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
 import { formatRelativeTime, formatShortDate } from "@/utils/time"
 import { Loading } from "@/components/loading"
 import { Link } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
 
 export const Home: React.FC = () => {
 
-    const [recommandLoading, setRecommandLoading] = useState(true)
-    const [recentLoading, setRecentLoading] = useState(true)
-    const [recommand, setRecommand] = useState<ArticleItem[]>([]);
-    const [recentArticles, setRecentArticles] = useState<ArticleItem[]>([]);
+    // 推荐文章
+    const recommandQuery = useQuery({
+        queryKey: ["recommand"],
+        queryFn: async () => {
+           return (await ArticleAPI.recommand());
+        }
+    })
+
+    // 最近更新
+    const recentQuery = useQuery({
+        queryKey: ["recent"],
+        queryFn: async () => {
+           return (await ArticleAPI.recent());
+        }
+    })
 
 
-    useEffect(() => {
-        ArticleAPI.recommand().then(res => {
-            setRecommand(res.data);
-            setRecommandLoading(false);
-        })
-    }, [])
-
-    useEffect(() => {
-        ArticleAPI.recent().then(res => {
-            setRecentArticles(res.data);
-            setRecentLoading(false);
-        })
-    }, [])
+    const recommandList = recommandQuery.data?.data ?? [];
+    const recentList = recentQuery.data?.data ?? [];
 
     return (
         <div className="home-container">
@@ -77,9 +76,9 @@ export const Home: React.FC = () => {
                         <h2 className="section-title">推荐文章</h2>
                         <Link to="/articles" className="view-more">查看更多 →</Link>
                     </div>
-                    {recommandLoading ? (<Loading />) : (
+                    {recommandQuery.isLoading ? (<Loading />) : (
                         <div className="article-grid">
-                            {recommand.map(article => (
+                            {recommandList.map(article => (
                                 <div key={article.articleId} className="article-card">
                                     <h3 className="card-title">{article.title}</h3>
                                     <p className="card-desc">{article.summary}</p>
@@ -99,10 +98,10 @@ export const Home: React.FC = () => {
                 <section className="recent-articles">
                     <h2 className="section-title">最近更新</h2>
                     <div className="article-list">
-                        {recentLoading ? (
+                        {recentQuery.isLoading ? (
                             <Loading />
                         ) : (
-                            recentArticles.map(article => (
+                            recentList.map(article => (
                                 <div key={article.articleId} className="article-item">
                                     <span className="item-date">{formatShortDate(article.publishedTime)}</span>
                                     <span className="item-title">{article.title}</span>
