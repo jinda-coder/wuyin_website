@@ -5,10 +5,13 @@ import "./index.scss"
 import { ArticleAPI } from "@/api/endpoint"
 import { formatRelativeTime, formatShortDate } from "@/utils/time"
 import { Loading } from "@/components/loading"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 
 export const Home: React.FC = () => {
+
+
+    const navigate = useNavigate()
 
     // 推荐文章
     const recommandQuery = useQuery({
@@ -30,10 +33,15 @@ export const Home: React.FC = () => {
     const recommandList = recommandQuery.data?.data ?? [];
     const recentList = recentQuery.data?.data ?? [];
 
+
+    const handleClick = (articleId: string) => {
+        navigate(`/articles/${articleId}`);
+    }
+
     return (
         <div className="home-container">
             {/* 轮播图 */}
-            <Swiper className="carousel" modules={[Autoplay, Pagination]} autoplay={{ delay: 2000 }} pagination={{ clickable: true }} loop={true}>
+            <Swiper className="carousel" modules={[Autoplay, Pagination]} autoplay={{ delay: 5000 }} pagination={{ clickable: true }} loop={true}>
                 {/* 网站整体介绍 */}
                 <SwiperSlide className="blog-introduction">
                     <h2 className="blog-introduction-title">欢迎来到雾隐的个人Blog</h2>
@@ -79,7 +87,7 @@ export const Home: React.FC = () => {
                     {recommandQuery.isLoading ? (<Loading />) : (
                         <div className="article-grid">
                             {recommandList.map(article => (
-                                <div key={article.articleId} className="article-card">
+                                <div key={article.articleId} className="article-card" onClick={() => handleClick(article.articleId)}>
                                     <h3 className="card-title">{article.title}</h3>
                                     <p className="card-desc">{article.summary}</p>
                                     <div className="card-meta">
@@ -102,10 +110,16 @@ export const Home: React.FC = () => {
                             <Loading />
                         ) : (
                             recentList.map(article => (
-                                <div key={article.articleId} className="article-item">
+                                <div key={article.articleId} className="article-item" onClick={() => handleClick(article.articleId)}>
                                     <span className="item-date">{formatShortDate(article.publishedTime)}</span>
                                     <span className="item-title">{article.title}</span>
-                                    <span className="item-tag">{article.tags}</span>
+                                    <div className="item-tags">
+                                        {article.tags.map((tag) => (
+                                            <span key={`${article.articleId}-${tag}`} className="item-tag">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             )))}
                     </div>
