@@ -3,8 +3,8 @@ import { Layout } from "@/components/layout";
 import { Home } from "@/pages/home";
 import { Articles } from "@/pages/articles";
 import { ArticleDetail } from "@/pages/article-detail";
-import { Notes } from "@/pages/notes";
 import { NotFound } from "@/pages/not-found";
+import { UnderConstruction } from "@/pages/under-construction";
 
 
 export const router = createBrowserRouter([
@@ -15,9 +15,9 @@ export const router = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: "articles", element: <Articles /> },
             { path: "articles/:articleId", element: <ArticleDetail /> },
-            { path: "notes", element: <Notes /> },
-            { path: "friends", element: <Articles /> },
-            { path: "message", element: <Articles /> },
+            { path: "notes", element: <UnderConstruction /> },
+            { path: "friends", element: <UnderConstruction /> },
+            { path: "message", element: <UnderConstruction /> },
             { path: "*", element: <NotFound /> }
         ]
     }
