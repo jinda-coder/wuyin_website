@@ -46,10 +46,10 @@ export const Home: React.FC = () => {
                 <SwiperSlide className="blog-introduction">
                     <h2 className="blog-introduction-title">欢迎来到雾隐的个人Blog</h2>
                     <ul className="blog-introduction-list">
-                        <li className="blog-introduction-list-item">该网站是用来锻炼个人全栈能力实践项目</li>
-                        <li className="blog-introduction-list-item">完全基于古法编程实现</li>
+                        <li className="blog-introduction-list-item">本项目是用于沉淀个人能力的实践项目</li>
+                        {/* <li className="blog-introduction-list-item">采用当前比较流行的技术栈</li> */}
                         <li className="blog-introduction-list-item">记录学习心得与技术分享</li>
-                        <li className="blog-introduction-list-item">持续迭代，追求更好的用户体验</li>
+                        <li className="blog-introduction-list-item">持续迭代，不断完善网站功能</li>
                     </ul>
                 </SwiperSlide>
                 {/* 网站构建信息 */}
