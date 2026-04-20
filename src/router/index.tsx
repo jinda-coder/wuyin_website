@@ -4,6 +4,7 @@ import { Home } from "@/pages/home";
 import { Articles } from "@/pages/articles";
 import { ArticleDetail } from "@/pages/article-detail";
 import { NotFound } from "@/pages/not-found";
+import { Friends } from "@/pages/friends";
 import { UnderConstruction } from "@/pages/under-construction";
 
 
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
             { path: "articles", element: <Articles /> },
             { path: "articles/:articleId", element: <ArticleDetail /> },
             { path: "notes", element: <UnderConstruction /> },
-            { path: "friends", element: <UnderConstruction /> },
+            { path: "friends", element: <Friends /> },
             { path: "message", element: <UnderConstruction /> },
             { path: "*", element: <NotFound /> }
         ]

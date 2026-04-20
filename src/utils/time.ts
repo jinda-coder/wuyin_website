@@ -28,10 +28,10 @@ export function formatRelativeTime(dateStr: string): string {
     if (days < 7) {
         return `${days}天前`
     }
-    if (weeks < 4) {
+    if (weeks < 5) {
         return `${weeks}周前`
     }
-    if (months < 12) {
+    if (months < 13) {
         return `${months}个月前`
     }
     return `${years}年前`
