@@ -1,14 +1,18 @@
 import "./index.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import avatar from "@/assets/avatar/avatar.jpg"
 import { MusicPlayer } from "../music-player"
 import { useEffect, useState } from "react"
+import { useAuthStore } from "@/stores/authStore"
 
 export const Header: React.FC = () => {
 
-    const [scrolled, setScrolled] = useState(false)
+    const [scrolled, setScrolled] = useState(false);
+    const navigate = useNavigate();
+    // 用户登录认证态
+    const { user, isAuthenticated } = useAuthStore();
 
-    useEffect( () => {
+    useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50)
         }
@@ -17,6 +21,12 @@ export const Header: React.FC = () => {
             window.removeEventListener('scroll', handleScroll)
         }
     })
+
+    const handleAvatarClick = () => {
+        if (!isAuthenticated) {
+            navigate("/login");
+        }
+    }
 
 
     return (
@@ -36,8 +46,8 @@ export const Header: React.FC = () => {
             {/* music-player + avatar */}
             <div className="header-right">
                 <MusicPlayer />
-                <div className="avatar">
-                    <img src={avatar} alt="avatar" />
+                <div className="avatar" onClick={handleAvatarClick}>
+                    {isAuthenticated ? (<img src={avatar} />) : "登录"}
                 </div>
             </div>
         </header>

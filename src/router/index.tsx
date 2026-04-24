@@ -6,6 +6,8 @@ import { ArticleDetail } from "@/pages/article-detail";
 import { NotFound } from "@/pages/not-found";
 import { Friends } from "@/pages/friends";
 import { UnderConstruction } from "@/pages/under-construction";
+import { GithubLogin } from "@/pages/oauth/github";
+import { Login } from "@/pages/login";
 
 
 export const router = createBrowserRouter([
@@ -19,6 +21,8 @@ export const router = createBrowserRouter([
             { path: "notes", element: <UnderConstruction /> },
             { path: "friends", element: <Friends /> },
             { path: "message", element: <UnderConstruction /> },
+            { path: "login", element: <Login /> },
+            { path: "login/github/callback", element: <GithubLogin /> },
             { path: "*", element: <NotFound /> }
         ]
     }

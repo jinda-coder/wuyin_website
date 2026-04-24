@@ -1,0 +1,106 @@
+.login-container {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    animation: fadeIn 0.4s ease;
+
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(6, 182, 212, 0.2);
+        border-radius: 16px;
+        padding: 48px 32px;
+        box-shadow: 0 4px 24px rgba(6, 182, 212, 0.1);
+        text-align: center;
+    }
+
+    .login-header {
+        margin-bottom: 32px;
+
+        .github-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            color: #24292f;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+    }
+
+    .github-login-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 14px 24px;
+        background: #24292f;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: #1a1e22;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(36, 41, 47, 0.3);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .login-divider {
+        display: flex;
+        align-items: center;
+        margin: 24px 0;
+        color: #94a3b8;
+        font-size: 0.75rem;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        span {
+            padding: 0 16px;
+        }
+    }
+
+    .login-other {
+        font-size: 0.75rem;
+        color: #94a3b8;
+    }
+}
