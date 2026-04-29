@@ -17,6 +17,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     (response: AxiosResponse<IResponse>) => {
         if (response.data.code !== 0) {
+            showMessage(response.data.msg);
             return Promise.reject(response.data.msg);
         }
         return response;

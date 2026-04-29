@@ -5,6 +5,7 @@ import type { ArticleItem } from "@/api/endpoint/articles"
 import { ArticleAPI } from "@/api/endpoint"
 import { useQuery } from "@tanstack/react-query"
 import { Loading } from "@/components/loading"
+import { SEO } from "@/components/seo"
 import { formatFullDate, formatRelativeTime } from "@/utils/time"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
@@ -118,6 +119,11 @@ export const Articles: React.FC = () => {
 
     return (
         <div className="articles-page">
+            <SEO
+                title="文章列表"
+                description="浏览雾隐整理的技术文章、知识笔记、踩坑复盘与经验总结。"
+                canonicalPath="/articles"
+            />
             <section className="articles-hero">
                 <p className="hero-subtitle">Article Archive</p>
                 <h1 className="hero-title">文章列表</h1>

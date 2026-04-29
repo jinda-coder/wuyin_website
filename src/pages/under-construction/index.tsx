@@ -1,5 +1,6 @@
 import "./index.scss";
 
+import { SEO } from "@/components/seo";
 import { Link, useLocation } from "react-router-dom";
 
 const PAGE_CONFIG: Record<string, { title: string; desc: string }> = {
@@ -26,6 +27,11 @@ export const UnderConstruction: React.FC = () => {
 
     return (
         <div className="under-construction-page">
+            <SEO
+                title={`${currentPage.title} - 建设中`}
+                description={currentPage.desc}
+                canonicalPath={location.pathname}
+            />
             <section className="construction-card">
                 <span className="construction-badge">COMING SOON</span>
                 <h1 className="construction-title">

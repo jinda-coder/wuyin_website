@@ -1,4 +1,5 @@
 import "./index.scss"
+import { SEO } from "@/components/seo"
 import { useAuthStore } from "@/stores/authStore"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -28,6 +29,12 @@ export const Login: React.FC = () => {
 
     return (
         <div className="login-container">
+            <SEO
+                title="登录"
+                description="登录雾隐的个人博客，参与评论和互动。"
+                canonicalPath="/login"
+                robots="noindex,follow"
+            />
             <div className="login-card">
                 <div className="login-header">
                     <div className="github-logo">

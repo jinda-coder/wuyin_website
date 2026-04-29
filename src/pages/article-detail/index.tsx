@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight"
 import { ArticleAPI } from "@/api/endpoint"
 import { Loading } from "@/components/loading"
+import { SEO } from "@/components/seo"
 import { formatFullDate, formatRelativeTime } from "@/utils/time"
 
 export const ArticleDetail: React.FC = () => {
@@ -49,6 +50,12 @@ export const ArticleDetail: React.FC = () => {
 
     return (
         <div className="article-detail-page">
+            <SEO
+                title={detailQuery.data?.title || "文章详情"}
+                description={detailQuery.data?.summary || "阅读雾隐的文章正文、技术总结与实践记录。"}
+                canonicalPath={`/articles/${articleId}`}
+                ogType="article"
+            />
             {detailQuery.isPending ? (
                 <Loading />
             ) : detailQuery.isError || !detailQuery.data ? (

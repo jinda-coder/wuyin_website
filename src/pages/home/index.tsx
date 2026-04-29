@@ -3,6 +3,7 @@ import { SwiperSlide, Swiper } from "swiper/react"
 import "swiper/swiper.css"
 import "./index.scss"
 import { ArticleAPI } from "@/api/endpoint"
+import { SEO } from "@/components/seo"
 import { formatRelativeTime, formatShortDate } from "@/utils/time"
 import { Loading } from "@/components/loading"
 import { Link, useNavigate } from "react-router-dom"
@@ -40,6 +41,11 @@ export const Home: React.FC = () => {
 
     return (
         <div className="home-container">
+            <SEO
+                title="首页"
+                description="雾隐的个人博客首页，持续记录技术学习、项目实践、个人总结与近期更新。"
+                canonicalPath="/"
+            />
             {/* 轮播图 */}
             <Swiper className="carousel" modules={[Autoplay, Pagination]} autoplay={{ delay: 5000 }} pagination={{ clickable: true }} loop={true}>
                 {/* 网站整体介绍 */}

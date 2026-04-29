@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
     // 用户登录认证态
-    const { user, isAuthenticated } = useAuthStore();
+    const {isAuthenticated } = useAuthStore();
 
     useEffect(() => {
         const handleScroll = () => {

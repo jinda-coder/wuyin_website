@@ -1,6 +1,7 @@
 import "./index.scss"
 import { FriendsAPI } from "@/api/endpoint"
 import { Loading } from "@/components/loading"
+import { SEO } from "@/components/seo"
 import { useQuery } from "@tanstack/react-query"
 
 export const Friends: React.FC = () => {
@@ -23,6 +24,11 @@ export const Friends: React.FC = () => {
 
     return (
         <div className="friends-container">
+            <SEO
+                title="友情链接"
+                description="浏览雾隐整理的友情链接，与志同道合的开发者和博客作者互联。"
+                canonicalPath="/friends"
+            />
             {/* 页面头部 */}
             <header className="friends-header">
                 <h1 className="page-title">友情链接</h1>
