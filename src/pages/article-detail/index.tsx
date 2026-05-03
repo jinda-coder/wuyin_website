@@ -1,5 +1,7 @@
 import "./index.scss"
 import "highlight.js/styles/atom-one-dark.css"
+import Zoom from "react-medium-image-zoom"
+import "react-medium-image-zoom/dist/styles.css"
 
 import { isValidElement, useCallback, useEffect, useRef, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
@@ -116,7 +118,12 @@ export const ArticleDetail: React.FC = () => {
                                             <pre {...props}>{children}</pre>
                                         </div>
                                     )
-                                }
+                                },
+                                img: ({ src, alt, ...props }) => (
+                                    <Zoom>
+                                        <img src={src} alt={alt} {...props} style={{ cursor: "zoom-in" }} />
+                                    </Zoom>
+                                )
                             }}
                         >
                             {detailQuery.data.contentMd || "暂无正文内容。"}
