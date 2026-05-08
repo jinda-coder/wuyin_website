@@ -15,7 +15,9 @@ export const Layout: React.FC = () => {
             {/* 全局提示 */}
             <Toast />
 
-            <Outlet />
+            <main className="main-content">
+                <Outlet />
+            </main>
         </div>
     )
 }
