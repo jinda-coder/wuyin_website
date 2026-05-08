@@ -1,5 +1,6 @@
 .friends-container {
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
 
     // 页面头部
@@ -43,6 +44,19 @@
             font-size: 14px;
             color: #64748b;
             letter-spacing: 2px;
+        }
+
+        @media (max-width: 640px) {
+            .page-title {
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+
+            .page-subtitle {
+                letter-spacing: 1px;
+            }
         }
     }
 

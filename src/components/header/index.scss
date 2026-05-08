@@ -6,13 +6,15 @@
 .header-container {
     position: sticky;
     display: flex;
+    flex-wrap: wrap;
     top: 0;
 
     width: 100%;
-    height: 72px;
+    min-height: 72px;
     // border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
     align-items: center;
     padding: 12px 32px;
+    gap: 12px 20px;
 
     transition: all 0.3s ease;
     z-index: 99;
@@ -32,6 +34,7 @@
     // logo
     .logo {
         flex: 1;
+        min-width: 0;
 
         .logo-container {
             font-family: "RubikGlitch";
@@ -48,6 +51,7 @@
         display: flex;
         flex: 0 auto;
         gap: 24px;
+        min-width: 0;
 
         .nav-item {
             width: 100%;
@@ -70,17 +74,20 @@
         justify-content: flex-end;
         align-items: center;
         gap: 16px;
+        min-width: 0;
 
         .avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             box-shadow: 0 8px 24px rgba(47, 29, 14, 0.14);
-            text-align: center;
-            line-height: 40px;
             font-size: 0.875rem;
             color: #5c687a;
             cursor: pointer;
+            flex-shrink: 0;
 
             &:hover {
                 color: #06b6d4;
@@ -91,6 +98,103 @@
                 height: 100%;
                 border-radius: 50%;
                 object-fit: cover;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .header-container {
+        padding: 12px 18px;
+
+        .nav-menu {
+            gap: 16px;
+        }
+
+        .header-right {
+            flex: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        align-items: flex-start;
+        gap: 10px 12px;
+
+        .logo {
+            flex: 1 1 calc(100% - 52px);
+        }
+
+        .header-right {
+            flex: 0 0 auto;
+            margin-left: auto;
+        }
+
+        .nav-menu {
+            order: 3;
+            flex: 0 0 100%;
+            justify-content: space-between;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-item {
+                white-space: nowrap;
+            }
+        }
+
+        .header-right .music-player {
+            order: 2;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 10px 14px 12px;
+        gap: 8px;
+        min-height: auto;
+
+        .logo {
+            .logo-container {
+                display: inline-block;
+                font-size: 0.98rem;
+                letter-spacing: 0.04em;
+            }
+        }
+
+        .header-right {
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .avatar {
+                align-self: center;
+                width: 36px;
+                height: 36px;
+                font-size: 0.8125rem;
+            }
+
+            .music-player {
+                order: 2;
+                flex: 1 1 100%;
+            }
+        }
+
+        .nav-menu {
+            gap: 10px;
+            font-size: 13px;
+            line-height: 1.2;
+
+            .nav-item {
+                padding: 2px 0;
             }
         }
     }

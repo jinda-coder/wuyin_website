@@ -1,7 +1,8 @@
 // 主布局容器
 .layout-container {
     position: relative;
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     background-color: #f9f9f9;
 }
