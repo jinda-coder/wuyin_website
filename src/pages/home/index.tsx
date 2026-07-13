@@ -50,21 +50,19 @@ export const Home: React.FC = () => {
                 <div className="hero-content">
                     <p className="hero-greeting">
                         <span className="hero-wave">👋</span>
-                        你好，欢迎来到我的数字花园
+                        你好，欢迎来到我的个人博客
                     </p>
                     <h1 className="hero-title">
-                        我是 <span className="hero-name">雾隐</span>，
+                        我是 <span className="hero-name">雾隐</span>
                         <br />
-                        一个热爱技术探索的开发者。
+                        {/* 一个热爱技术探索的开发者。 */}
                     </h1>
                     <p className="hero-desc">
-                        这里记录我的技术学习、项目实践、踩坑复盘与个人思考。
-                        我相信持续输出是最好的学习方式，期待与你交流成长。
+                        记录、分享、学习
                     </p>
-                    <div className="hero-actions">
+                    {/* <div className="hero-actions">
                         <Link to="/articles" className="hero-btn primary">浏览文章</Link>
-                        <Link to="/about" className="hero-btn secondary">了解更多</Link>
-                    </div>
+                    </div> */}
                     <div className="hero-status">
                         <span className="status-dot"></span>
                         <span>正在持续学习与创作中</span>
