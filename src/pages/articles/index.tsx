@@ -151,87 +151,89 @@ export const Articles: React.FC = () => {
                 </div>
             </section>
 
-            {pageQuery.isLoading ? (
-                <Loading />
-            ): (
-                <main className="articles-layout">
-                    <section className="articles-main">
-                        <div className="list-header">
-                            <h2>共 {total} 篇</h2>
-                            <span>第 {pageNo} / {totalPages} 页</span>
-                        </div>
-
-                        <div className="article-list">
-                            {filteredList.length === 0 ? (
-                                <div className="state-card">没有匹配结果，试试调整关键词或分类。</div>
-                            ) : (
-                                filteredList.map((article) => (
-                                    <article key={article.articleId} className="article-card" onClick={() => handleClickArticle(article.articleId)}>
-                                        <div className="article-meta">
-                                            <span>{formatFullDate(article.publishedTime)}</span>
-                                            <span>·</span>
-                                            <span>{formatRelativeTime(article.publishedTime)}</span>
-                                            <span className="category-chip">{article.category}</span>
-                                        </div>
-                                        <h3 className="article-title">{article.title}</h3>
-                                        <p className="article-summary">{article.summary}</p>
-                                        <div className="tag-list">
-                                            {article.tags.slice(0, 4).map((tag) => (
-                                                <span key={tag} className="tag-item">{tag}</span>
-                                            ))}
-                                        </div>
-                                    </article>
-                                ))
-                            )}
-                        </div>
-
-                        <div className="pagination">
-                            <button
-                                className="page-btn"
-                                onClick={() => gotoPage(pageNo - 1)}
-                                disabled={pageNo === 1}
-                            >
-                                上一页
-                            </button>
-                            <div className="page-number-list">
-                                {pageItems.map((page, index) => page === "ellipsis" ? (
-                                    <span key={`ellipsis-${index}`} className="page-ellipsis">...</span>
-                                ) : (
-                                    <button
-                                        key={page}
-                                        className={`page-number ${page === pageNo ? "active" : ""}`}
-                                        onClick={() => gotoPage(page)}
-                                    >
-                                        {page}
-                                    </button>
-                                ))}
+            <main className="articles-layout">
+                <section className="articles-main">
+                    {pageQuery.isLoading ? (
+                        <Loading />
+                    ) : (
+                        <>
+                            <div className="list-header">
+                                <h2>共 {total} 篇</h2>
+                                <span>第 {pageNo} / {totalPages} 页</span>
                             </div>
-                            <button
-                                className="page-btn"
-                                onClick={() => gotoPage(pageNo + 1)}
-                                disabled={pageNo === totalPages}
-                            >
-                                下一页
-                            </button>
-                        </div>
-                    </section>
 
-                    <aside className="articles-aside">
-                        <h3 className="aside-title">推荐阅读</h3>
-                        <div className="aside-list">
-                            {(recommandQuery.data ?? []).slice(0, 5).map((article: ArticleItem, index) => (
-                                <article key={article.articleId} className="aside-item" onClick={() => handleClickArticle(article.articleId)}>
-                                    <span className="aside-order">0{index + 1}</span>
-                                    <div className="aside-content">
-                                        <h4>{article.title}</h4>
-                                        <p>{formatFullDate(article.publishedTime)}</p>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    </aside>
-                </main>
-            )}
+                            <div className="article-list">
+                                {filteredList.length === 0 ? (
+                                    <div className="state-card">没有匹配结果，试试调整关键词或分类。</div>
+                                ) : (
+                                    filteredList.map((article) => (
+                                        <article key={article.articleId} className="article-card" onClick={() => handleClickArticle(article.articleId)}>
+                                            <div className="article-meta">
+                                                <span>{formatFullDate(article.publishedTime)}</span>
+                                                <span>·</span>
+                                                <span>{formatRelativeTime(article.publishedTime)}</span>
+                                                <span className="category-chip">{article.category}</span>
+                                            </div>
+                                            <h3 className="article-title">{article.title}</h3>
+                                            <p className="article-summary">{article.summary}</p>
+                                            <div className="tag-list">
+                                                {article.tags.slice(0, 4).map((tag) => (
+                                                    <span key={tag} className="tag-item">{tag}</span>
+                                                ))}
+                                            </div>
+                                        </article>
+                                    ))
+                                )}
+                            </div>
+
+                            <div className="pagination">
+                                <button
+                                    className="page-btn"
+                                    onClick={() => gotoPage(pageNo - 1)}
+                                    disabled={pageNo === 1}
+                                >
+                                    上一页
+                                </button>
+                                <div className="page-number-list">
+                                    {pageItems.map((page, index) => page === "ellipsis" ? (
+                                        <span key={`ellipsis-${index}`} className="page-ellipsis">...</span>
+                                    ) : (
+                                        <button
+                                            key={page}
+                                            className={`page-number ${page === pageNo ? "active" : ""}`}
+                                            onClick={() => gotoPage(page)}
+                                        >
+                                            {page}
+                                        </button>
+                                    ))}
+                                </div>
+                                <button
+                                    className="page-btn"
+                                    onClick={() => gotoPage(pageNo + 1)}
+                                    disabled={pageNo === totalPages}
+                                >
+                                    下一页
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </section>
+
+                <aside className="articles-aside">
+                    <h3 className="aside-title">推荐阅读</h3>
+                    <div className="aside-list">
+                        {(recommandQuery.data ?? []).slice(0, 5).map((article: ArticleItem, index) => (
+                            <article key={article.articleId} className="aside-item" onClick={() => handleClickArticle(article.articleId)}>
+                                <span className="aside-order">0{index + 1}</span>
+                                <div className="aside-content">
+                                    <h4>{article.title}</h4>
+                                    <p>{formatFullDate(article.publishedTime)}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </aside>
+            </main>
         </div>
     )
 }
