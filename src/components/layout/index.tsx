@@ -3,6 +3,7 @@ import "./index.scss"
 
 import { Outlet } from "react-router-dom"
 import { Header } from "../header"
+import { Footer } from "../footer"
 import { Toast } from "../toast"
 
 
@@ -16,6 +17,8 @@ export const Layout: React.FC = () => {
             <Toast />
 
             <Outlet />
+
+            <Footer />
         </div>
     )
 }

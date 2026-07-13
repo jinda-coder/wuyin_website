@@ -11,7 +11,7 @@
     height: 50px;
     padding-left: 20px;
     border-radius: 25px;
-    background-color: rgba(6, 182, 212, 0.08);
+    background-color: var(--bg-hover);
     cursor: default;
 
     // 播放暂停按钮
@@ -19,20 +19,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: linear-gradient(135deg, #06b6d4, #3b82f6);
+        background: var(--gradient-primary);
         border: 1px solid transparent;
         border-radius: 50%;
         width: 32px;
         height: 32px;
-        flex-shrink: 0; 
+        flex-shrink: 0;
         padding: 4px 4px 4px 5px;
         cursor: pointer;
+        color: var(--text-inverse);
 
         svg {
-            stroke: #06b6d4;
-            fill: #06b6d4;
-            // width: 100%;
-            // height: 100%;
+            stroke: currentColor;
+            fill: currentColor;
+            width: 18px;
+            height: 18px;
         }
     }
 
@@ -56,6 +57,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: center;
+            color: var(--text-secondary);
         }
 
         // 歌词window
@@ -65,13 +67,13 @@
             line-height: var(--lyric-line-height);
             text-align: center;
             overflow: hidden;
-            color: #666;
+            color: var(--text-muted);
             position: relative;
         }
 
         .lyrics-track {
             // 关键：平滑移动
-            transition: transform 0.3s ease; 
+            transition: transform 0.3s ease;
             will-change: transform;
         }
 
@@ -88,7 +90,6 @@
         .lyrics-line {
             font-weight: 500;
         }
-
     }
 
     // 音乐动效
@@ -103,12 +104,10 @@
         .bar {
             width: 10px;
             height: 20px;
-            background: linear-gradient(to top, #22d3ee, #06b6d4);
+            background: var(--gradient-primary);
             animation: equalizer 1s infinite ease-in-out;
             animation-play-state: paused;
         }
-
-
     }
 
     .music-player.is-playing .effect .bar {

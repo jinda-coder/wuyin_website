@@ -1,10 +1,13 @@
-// 主布局容器
 .layout-container {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 // 网格背景
@@ -18,24 +21,29 @@
 
     // 通过横纵渐变实现网格效果
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 18px 18px;
 
     // 遮罩层 实现网格渐隐效果
-    mask-image: radial-gradient(circle at center,
-            black 0%,
-            black 30%,
-            transparent 80%);
+    mask-image: var(--grid-mask);
 
     // 兼容性
-    -webkit-mask-image: radial-gradient(circle at center,
-            black 0%,
-            black 30%,
-            transparent 80%);
+    -webkit-mask-image: var(--grid-mask);
 }
 
-// .layout-container>* {
-//     position: relative;
-//     z-index: 2;
-// }
+.layout-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+.layout-container > main,
+.layout-container > .home-container,
+.layout-container > .articles-page,
+.layout-container > .article-detail-page,
+.layout-container > .friends-container,
+.layout-container > .under-construction-page,
+.layout-container > .login-container,
+.layout-container > .not-found-page {
+    flex: 1 0 auto;
+}

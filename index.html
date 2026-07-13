@@ -17,6 +17,19 @@
       content="雾隐的个人博客，记录技术学习、实践总结、踩坑复盘与个人思考。"
     />
     <meta name="msvalidate.01" content="4B0D90F8FDD63B7D0DC0C7DDE8700CA5" />
+    <script>
+      (function () {
+        var theme = localStorage.getItem('theme-store');
+        var mode = 'system';
+        try {
+          mode = theme ? JSON.parse(theme).state.mode : 'system';
+        } catch (e) {}
+        var resolved = mode === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : mode;
+        document.documentElement.setAttribute('data-theme', resolved);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

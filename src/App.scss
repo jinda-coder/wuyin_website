@@ -1,3 +1,5 @@
+@import "./styles/theme.scss";
+
 * {
     margin: 0;
     padding: 0;
@@ -13,15 +15,52 @@ body,
 
 body {
     overflow-x: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+// 全局滚动条
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+
+    &:hover {
+        background: var(--accent-primary);
+    }
+}
+
+// 选中文字样式
+::selection {
+    background: rgba(6, 182, 212, 0.25);
+    color: var(--text-primary);
+}
+
+// 全局链接
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--accent-primary-hover);
+    }
+}
 
 // 全局动画效果
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(10px);
-    }   
+    }
 
     to {
         opacity: 1;

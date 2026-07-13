@@ -14,9 +14,9 @@
         align-items: center;
         gap: 10px;
         padding: 12px 20px;
-        border-radius: 8px;
-        background: #fff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: var(--radius-sm);
+        background: var(--bg-card);
+        box-shadow: var(--shadow-md);
         animation: slideIn 0.3s ease;
         pointer-events: auto;
         min-width: 200px;
@@ -34,7 +34,7 @@
 
         .toast-content {
             font-size: 14px;
-            color: #334155;
+            color: var(--text-secondary);
         }
     }
 
@@ -67,11 +67,11 @@
     }
 
     .toast-info {
-        border-left: 4px solid #06b6d4;
+        border-left: 4px solid var(--accent-primary);
 
         .toast-icon {
             background: rgba(6, 182, 212, 0.1);
-            color: #06b6d4;
+            color: var(--accent-primary);
         }
     }
 }

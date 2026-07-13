@@ -1,16 +1,25 @@
 import "./index.scss"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import avatar from "@/assets/avatar/avatar.jpg"
 import { MusicPlayer } from "../music-player"
 import { useEffect, useState } from "react"
 import { useAuthStore } from "@/stores/authStore"
 
+const navItems = [
+    { path: "/", label: "首页" },
+    { path: "/articles", label: "文章" },
+    { path: "/notes", label: "随笔" },
+    { path: "/friends", label: "友链" },
+    { path: "/message", label: "留言" },
+];
+
 export const Header: React.FC = () => {
 
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     // 用户登录认证态
-    const {isAuthenticated } = useAuthStore();
+    const { isAuthenticated } = useAuthStore();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,11 +46,15 @@ export const Header: React.FC = () => {
             </div>
             {/* 导航 */}
             <nav className="nav-menu">
-                <Link to="/" className="nav-item active">首页</Link>
-                <Link to="/articles" className="nav-item">文章</Link>
-                <Link to="/notes" className="nav-item">随笔</Link>
-                <Link to="/friends" className="nav-item">友链</Link>
-                <Link to="/message" className="nav-item">留言</Link>
+                {navItems.map((item) => (
+                    <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
+                    >
+                        {item.label}
+                    </Link>
+                ))}
             </nav>
             {/* music-player + avatar */}
             <div className="header-right">

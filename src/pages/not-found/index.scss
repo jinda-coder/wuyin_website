@@ -7,16 +7,11 @@
 .not-found-card {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid rgba(14, 116, 144, 0.2);
-    background:
-        radial-gradient(circle at 12% 15%, rgba(6, 182, 212, 0.14), transparent 46%),
-        radial-gradient(circle at 86% 12%, rgba(59, 130, 246, 0.16), transparent 43%),
-        rgba(255, 255, 255, 0.76);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    background: var(--gradient-hero);
     backdrop-filter: blur(8px);
-    box-shadow:
-        0 18px 44px rgba(14, 116, 144, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-md);
     padding: 56px 44px;
     text-align: center;
 }
@@ -28,14 +23,14 @@
     font-weight: 800;
     letter-spacing: 0.08em;
     color: transparent;
-    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 55%, #8b5cf6 100%);
+    background: var(--gradient-text);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .not-found-title {
     margin: 12px 0 0;
-    color: #0f172a;
+    color: var(--text-primary);
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.25;
 }
@@ -43,7 +38,7 @@
 .not-found-desc {
     max-width: 640px;
     margin: 18px auto 0;
-    color: #64748b;
+    color: var(--text-tertiary);
     font-size: 16px;
     line-height: 1.8;
 }
@@ -70,36 +65,36 @@
 }
 
 .primary-btn {
-    color: #ffffff;
+    color: var(--text-inverse);
     border: 1px solid transparent;
-    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    background: var(--gradient-primary);
 
     &:hover {
         transform: translateY(-1px);
-        box-shadow: 0 10px 24px rgba(14, 116, 144, 0.26);
+        box-shadow: var(--shadow-glow);
     }
 }
 
 .ghost-btn {
-    color: #0e7490;
-    border: 1px solid rgba(14, 116, 144, 0.32);
-    background: rgba(255, 255, 255, 0.88);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
     cursor: pointer;
 
     &:hover {
-        border-color: #06b6d4;
-        box-shadow: 0 8px 20px rgba(6, 182, 212, 0.16);
+        border-color: var(--accent-primary);
+        box-shadow: var(--shadow-glow);
     }
 }
 
 .link-btn {
-    color: #0369a1;
-    border: 1px solid rgba(59, 130, 246, 0.24);
-    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
 
     &:hover {
-        color: #075985;
-        background: rgba(59, 130, 246, 0.16);
+        color: var(--accent-primary);
+        background: var(--bg-hover);
     }
 }
 
@@ -109,7 +104,7 @@
     }
 
     .not-found-card {
-        border-radius: 16px;
+        border-radius: var(--radius-lg);
         padding: 34px 16px;
     }
 
