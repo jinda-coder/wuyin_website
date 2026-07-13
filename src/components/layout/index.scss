@@ -20,3 +20,10 @@
 .layout-container > .not-found-page {
     flex: 1 0 auto;
 }
+
+// oh-my-live2d 看板娘舞台：确保在最顶层，不被 footer 等内容遮挡
+#oml2d-stage,
+#oml2d-status-bar,
+#oml2d-menus {
+    z-index: 9999 !important;
+}
