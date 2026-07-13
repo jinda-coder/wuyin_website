@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
                         {/* 一个热爱技术探索的开发者。 */}
                     </h1>
                     <p className="hero-desc">
-                        记录、分享、学习
+                        心想写很多的信件，容我再琢磨遍字眼。
                     </p>
                     {/* <div className="hero-actions">
                         <Link to="/articles" className="hero-btn primary">浏览文章</Link>
