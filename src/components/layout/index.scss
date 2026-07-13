@@ -5,36 +5,9 @@
     width: 100%;
     max-width: 100%;
     min-height: 100vh;
-    background-color: var(--bg-primary);
+    background-color: transparent;
     color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-// 网格背景
-.layout-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    // 禁止鼠标事件
-    pointer-events: none;
-
-    // 通过横纵渐变实现网格效果
-    background-image:
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 18px 18px;
-
-    // 遮罩层 实现网格渐隐效果
-    mask-image: var(--grid-mask);
-
-    // 兼容性
-    -webkit-mask-image: var(--grid-mask);
-}
-
-.layout-container > * {
-    position: relative;
-    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 .layout-container > main,

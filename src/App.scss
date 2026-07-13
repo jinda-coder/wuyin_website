@@ -18,6 +18,21 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    // 全局网格背景：固定在 body 层级，不依赖 z-index 堆叠
+    &::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+            linear-gradient(var(--grid-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+        background-size: 18px 18px;
+        mask-image: var(--grid-mask);
+        -webkit-mask-image: var(--grid-mask);
+    }
 }
 
 // 全局滚动条

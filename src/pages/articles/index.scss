@@ -193,25 +193,17 @@
     padding: 18px 18px 16px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
-    background: rgba(255, 255, 255, 0.45);
+    background: var(--bg-card);
     box-shadow: var(--shadow-sm);
     animation: fadeIn 0.4s ease;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
-
-    [data-theme="dark"] & {
-        background: rgba(30, 41, 59, 0.4);
-    }
 
     &:hover {
         transform: translateY(-2px);
         border-color: rgba(6, 182, 212, 0.32);
         box-shadow: var(--shadow-glow);
         cursor: pointer;
-        background: rgba(255, 255, 255, 0.65);
-
-        [data-theme="dark"] & {
-            background: rgba(30, 41, 59, 0.55);
-        }
+        background: var(--bg-card);
     }
 
     .article-meta {
