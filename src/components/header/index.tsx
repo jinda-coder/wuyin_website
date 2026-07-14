@@ -1,8 +1,7 @@
 import "./index.scss"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import avatar from "@/assets/avatar/avatar.jpg"
 import { MusicPlayer } from "../music-player"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useAuthStore } from "@/stores/authStore"
 
 const navItems = [
@@ -16,27 +15,41 @@ const navItems = [
 export const Header: React.FC = () => {
 
     const [scrolled, setScrolled] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    // 用户登录认证态
-    const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated, user, logout } = useAuthStore();
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
+        const handleScroll = () => setScrolled(window.scrollY > 50)
         window.addEventListener('scroll', handleScroll)
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
+        return () => window.removeEventListener('scroll', handleScroll)
     })
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setDropdownOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     const handleAvatarClick = () => {
         if (!isAuthenticated) {
             navigate("/login");
+        } else {
+            setDropdownOpen(prev => !prev)
         }
     }
 
+    const handleLogout = () => {
+        logout()
+        setDropdownOpen(false)
+        navigate("/")
+    }
 
     return (
         <header className={`header-container ${scrolled ? "scrolled" : ""}`}>
@@ -59,8 +72,16 @@ export const Header: React.FC = () => {
             {/* music-player + avatar */}
             <div className="header-right">
                 <MusicPlayer />
-                <div className="avatar" onClick={handleAvatarClick}>
-                    {isAuthenticated ? (<img src={avatar} />) : "登录"}
+                <div className="avatar-wrapper" ref={dropdownRef}>
+                    <div className="avatar" onClick={handleAvatarClick}>
+                        {isAuthenticated ? (<img src={user?.avatar} />) : "登录"}
+                    </div>
+                    {isAuthenticated && dropdownOpen && (
+                        <div className="avatar-dropdown">
+                            <div className="dropdown-user">{user?.userName}</div>
+                            <button className="dropdown-item danger" onClick={handleLogout}>退出登录</button>
+                        </div>
+                    )}
                 </div>
             </div>
         </header>

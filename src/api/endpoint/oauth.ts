@@ -2,10 +2,11 @@ import axiosInstance, { type IResponse } from "../ajax"
 
 
 export interface GithubUserInfo {
-    id: string,
-    email: string,
-    nickname: string,
-    avatar_url: string
+    user_id: number,
+    username: string,
+    email: string | null,
+    avatar: string,
+    access_token: string,
 }
 
 /**

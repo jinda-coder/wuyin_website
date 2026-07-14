@@ -1,0 +1,62 @@
+.admin-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 18px 56px;
+    color: var(--text-primary);
+}
+
+.admin-hero {
+    padding: 28px 28px 32px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 22px;
+    border: 1px solid var(--border-color);
+    background: var(--gradient-hero);
+
+    .hero-subtitle {
+        font-size: 12px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--accent-primary);
+    }
+
+    .hero-title {
+        margin-top: 10px;
+        font-size: 34px;
+        line-height: 1.2;
+        color: var(--text-primary);
+    }
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-tertiary);
+    padding: 8px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+
+    &:hover {
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+    }
+
+    &.active {
+        background: var(--gradient-primary);
+        color: var(--text-inverse);
+        border-color: transparent;
+        box-shadow: var(--shadow-glow);
+    }
+}
+
+.admin-content {
+    min-height: 300px;
+}

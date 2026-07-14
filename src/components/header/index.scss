@@ -94,6 +94,11 @@
         gap: 16px;
         min-width: 0;
 
+        .avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
         .avatar {
             display: flex;
             align-items: center;
@@ -105,7 +110,6 @@
             font-size: 0.875rem;
             color: var(--text-tertiary);
             cursor: pointer;
-            flex-shrink: 0;
             background: var(--bg-card);
             transition: color 0.2s ease, transform 0.2s ease;
 
@@ -119,6 +123,53 @@
                 height: 100%;
                 border-radius: 50%;
                 object-fit: cover;
+            }
+        }
+
+        .avatar-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            min-width: 140px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            z-index: 200;
+            animation: fadeIn 0.15s ease;
+
+            .dropdown-user {
+                padding: 10px 14px 8px;
+                font-size: 13px;
+                color: var(--text-tertiary);
+                border-bottom: 1px solid var(--border-color);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .dropdown-item {
+                display: block;
+                width: 100%;
+                padding: 10px 14px;
+                text-align: left;
+                background: none;
+                border: none;
+                font-size: 14px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                transition: background 0.15s;
+
+                &:hover {
+                    background: var(--bg-hover);
+                    color: var(--accent-primary);
+                }
+
+                &.danger:hover {
+                    color: #f87171;
+                    background: rgba(248, 113, 113, 0.08);
+                }
             }
         }
     }

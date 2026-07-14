@@ -13,6 +13,22 @@ const axiosInstance = axios.create({
     timeout: 5000
 })
 
+// 请求拦截器 —— 自动注入 JWT token
+axiosInstance.interceptors.request.use((config) => {
+    const raw = localStorage.getItem("auth-store")
+    if (raw) {
+        try {
+            const token = JSON.parse(raw)?.state?.token as string | null
+            if (token) {
+                config.headers["Authorization"] = `Bearer ${token}`
+            }
+        } catch {
+            // ignore
+        }
+    }
+    return config
+})
+
 // 响应拦截器
 axiosInstance.interceptors.response.use(
     (response: AxiosResponse<IResponse>) => {
