@@ -24,7 +24,8 @@ export const Login: React.FC = () => {
 
     const handleGithubLogin = () => {
         const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID
-        window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=http://127.0.0.1:5173/login/github/callback&prompt=consent&scope=user`
+        const redirectUri = import.meta.env.VITE_GITHUB_REDIRECT_URI
+        window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&prompt=consent&scope=user`
     }
 
     return (
