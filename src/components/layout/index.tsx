@@ -27,11 +27,12 @@ export const Layout: React.FC = () => {
                             height: 420,
                             bottom: 0,
                             right: 0
-                        }
+                        },
+                        motionPreloadStrategy: "ALL"
                     }
                 ],
                 statusBar: {
-                    loadingMessage: "看板娘加载中..."
+                    loadingMessage: "小埋正在加载ing..."
                 },
                 menus: {
                     items: (defaultItems) => {
