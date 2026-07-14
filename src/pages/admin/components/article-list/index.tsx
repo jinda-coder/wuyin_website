@@ -19,7 +19,7 @@ export const ArticleList: React.FC = () => {
     const [status, setStatus] = useState<StatusFilter>("all")
     const [pageNo, setPageNo] = useState(1)
 
-    const { data, isLoading, refetch } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["admin", "articles", status, pageNo],
         queryFn: async () => {
             const resp = await AdminAPI.listAdminArticles({ pageNo, pageSize: PAGE_SIZE, status })
