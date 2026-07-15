@@ -20,7 +20,7 @@ export const Layout: React.FC = () => {
                 mobileDisplay: false,
                 models: [
                     {
-                        path: "https://cdn.jsdelivr.net/gh/evrstr/live2d-widget-models/live2d_evrstr/mai/model.json",
+                        path: "/live2d/mai/model.json",
                         scale: 0.35,
                         position: [0, 40],
                         stageStyle: {
@@ -29,11 +29,11 @@ export const Layout: React.FC = () => {
                             bottom: 0,
                             right: 0
                         },
-                        motionPreloadStrategy: "ALL"
+                        motionPreloadStrategy: "IDLE"
                     }
                 ],
                 statusBar: {
-                    loadingMessage: "小埋正在加载ing..."
+                    loadingMessage: "小埋正在赶来的路上..."
                 },
                 menus: {
                     items: (defaultItems) => {
