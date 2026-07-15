@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom"
 import { Header } from "../header"
 import { Footer } from "../footer"
 import { Toast } from "../toast"
+import { ParticleCanvas } from "../particle-canvas"
 
 
 
@@ -47,6 +48,7 @@ export const Layout: React.FC = () => {
 
     return (
         <div className="layout-container">
+            <ParticleCanvas />
             {/* 头部导航栏 */}
             <Header />
             {/* 全局提示 */}

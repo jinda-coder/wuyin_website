@@ -1,0 +1,8 @@
+// 粒子画布：固定全屏背景层
+// z-index: -1 → 在网格背景之上（body::before 也是 -1，DOM 后序绘制故在其上），正文内容自然覆盖于其上
+.particle-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
