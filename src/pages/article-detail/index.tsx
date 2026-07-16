@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight"
+import rehypeRaw from "rehype-raw"
+import remarkGfm from "remark-gfm"
 import { ArticleAPI } from "@/api/endpoint"
 import { Loading } from "@/components/loading"
 import { SEO } from "@/components/seo"
@@ -86,7 +88,8 @@ export const ArticleDetail: React.FC = () => {
 
                     <article className="markdown-body">
                         <ReactMarkdown
-                            rehypePlugins={[rehypeHighlight]}
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeRaw, rehypeHighlight]}
                             components={{
                                 pre: ({ children, ...props }) => {
                                     const codeNode = Array.isArray(children) ? children[0] : children
